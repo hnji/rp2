@@ -26,12 +26,11 @@ function seed_table_users()
 	{
 		$st = $db->prepare( 'INSERT INTO users(username, password_hash, email, registration_sequence, has_registered, admin) VALUES (:username, :password_hash, :email, :registration_sequence, :has_registered, :admin)' );
 
-        $st->execute( array( 'username' => 'admin'>, 'password_hash' => password_hash( 'admin', PASSWORD_DEFAULT ), 'email' => 'admin@te.ka', 'registration_sequence'  => 'ABA', 'has_registered' => 1, 'admin' = 1 ) );
-		$st->execute( array( 'username' => 'mirna'>, 'password_hash' => password_hash( 'mirninasifra', PASSWORD_DEFAULT ), 'email' => 'mirna@te.ka', 'registration_sequence'  => 'AAA', 'has_registered' => 1, 'admin' = 0 ) );
-		$st->execute( array( 'username' => 'matea'>, 'password_hash' => password_hash( 'mateinasifra', PASSWORD_DEFAULT ), 'email' => 'matea@te.ka', 'registration_sequence'  => 'AAB', 'has_registered' => 1, 'admin' = 0 ) );
-		$st->execute( array( 'username' => 'kreso'>, 'password_hash' => password_hash( 'kresinasifra', PASSWORD_DEFAULT ), 'email' => 'kreso@te.ka', 'registration_sequence'  => 'ABB', 'has_registered' => 0, 'admin' = 0 ) );
-		$st->execute( array( 'username' => 'leo'>, 'password_hash' => password_hash( 'leovasifra', PASSWORD_DEFAULT ), 'email' => 'leo@te.ka', 'registration_sequence'  => 'BAA', 'has_registered' => 0, 'admin' = 0 ) );
-        // registration name?
+        $st->execute( array( 'username' => 'admin', 'password_hash' => password_hash( 'admin', PASSWORD_DEFAULT ), 'email' => 'admin@te.ka', 'registration_sequence'  => 'ABA', 'has_registered' => 1, 'admin' => 1 ) );
+		$st->execute( array( 'username' => 'mirna', 'password_hash' => password_hash( 'mirninasifra', PASSWORD_DEFAULT ), 'email' => 'mirna@te.ka', 'registration_sequence'  => 'AAA', 'has_registered' => 1, 'admin' => 0 ) );
+		$st->execute( array( 'username' => 'matea', 'password_hash' => password_hash( 'mateinasifra', PASSWORD_DEFAULT ), 'email' => 'matea@te.ka', 'registration_sequence'  => 'AAB', 'has_registered' => 1, 'admin' => 0 ) );
+		$st->execute( array( 'username' => 'kreso', 'password_hash' => password_hash( 'kresinasifra', PASSWORD_DEFAULT ), 'email' => 'kreso@te.ka', 'registration_sequence'  => 'ABB', 'has_registered' => 0, 'admin' => 0 ) );
+		$st->execute( array( 'username' => 'leo', 'password_hash' => password_hash( 'leovasifra', PASSWORD_DEFAULT ), 'email' => 'leo@te.ka', 'registration_sequence'  => 'BAA', 'has_registered' => 0, 'admin' => 0 ) );
 	}
 	catch( PDOException $e ) { exit( "PDO error (seed_table_users): " . $e->getMessage() ); }
 
