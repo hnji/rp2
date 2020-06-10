@@ -1,10 +1,10 @@
 <?php
 require_once __DIR__ . '/_header.php';
-require_once __DIR__ . '/izbornik.php';
+require_once __DIR__ . '/menu.php';
 ?>
 <p>
 <h3>Login</h3>
-<form method='post' action='chat.php?rt=users/login'>
+<form method='post' action='teka.php?rt=users/signin'>
     username:
     <input type="text" name="username">
     <br>
@@ -17,7 +17,7 @@ require_once __DIR__ . '/izbornik.php';
 
 <p>
 <h3>Don't have an account yet? Register here.</h3>
-<form method='post' action='chat.php?rt=users/register'>
+<form method='post' action='chat.php?rt=users/signup'>
     username: (3-10 letters)
     <br>
     <input type="text" name="newusername">

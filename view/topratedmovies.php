@@ -1,21 +1,22 @@
 <?php require_once __DIR__ . '/_header.php'; ?>
-<?php require_once __DIR__ . '/izbornik.php'; ?>
+<?php require_once __DIR__ . '/menu.php'; ?>
 
 <ul> 
 <?php
+//ispis 5 najbolje ocijenjenih filmova
+//koje sve podatke o filmu prikazujemo?
 
+    echo '<ol>';
    foreach( $movieList as $movie ){
     echo
-    '<ol>' . 
     '<li>' .
     $movie->title .
-    '</li>' .
-    '<li>' .
+    '   ' .
     $movie->rating .
-    '</li>' .
-    '</ol>';
-    
+    '</li>';
 }
+    echo '</ol>';
+
     ?>
         
 </ul>
