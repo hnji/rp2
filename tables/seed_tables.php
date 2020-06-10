@@ -52,7 +52,7 @@ function seed_table_movies()
 	}
 	catch( PDOException $e ) { exit( "PDO error (seed_table_movies): " . $e->getMessage() ); }
 
-	echo "Ubacio knjige u tablicu movies.<br />";
+	echo "Ubacio filmove u tablicu movies.<br />";
 }
 
 
@@ -71,7 +71,7 @@ function seed_table_watchlist()
 	}
 	catch( PDOException $e ) { exit( "PDO error (seed_table_watchlist): " . $e->getMessage() ); }
 
-	echo "Ubacio knjige u tablicu watchlist.<br />";
+	echo "Ubacio liste filmova za pogledati u tablicu watchlist.<br />";
 }
 
 function seed_table_ratings()
@@ -89,7 +89,7 @@ function seed_table_ratings()
 	}
 	catch( PDOException $e ) { exit( "PDO error (seed_table_ratings): " . $e->getMessage() ); }
 
-	echo "Ubacio knjige u tablicu ratings.<br />";
+	echo "Ubacio ocjene u tablicu ratings.<br />";
 }
 
 function seed_table_comments()
@@ -102,11 +102,11 @@ function seed_table_comments()
 
         $st->execute( array( 'id_user' => 3, 'id_movie' => 1, 'content' => 'Bubimir, Bubimir,') );
         $st->execute( array( 'id_user' => 3, 'id_movie' => 2, 'content' => 'Bubimir!') ); 
-ž
+
 	}
 	catch( PDOException $e ) { exit( "PDO error (seed_table_comments): " . $e->getMessage() ); }
 
-	echo "Ubacio knjige u tablicu comments.<br />";
+	echo "Ubacio komentare u tablicu comments.<br />";
 }
 
 
