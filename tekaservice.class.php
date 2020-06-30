@@ -1,11 +1,11 @@
 <?php
 
-require __DIR__ . '/../app/database/db.class.php';
-require __DIR__ . '/user.class.php';
-require __DIR__ . '/movie.class.php';
-require __DIR__ . '/rating.class.php';
-require __DIR__ . '/comment.class.php';
-require __DIR__ . '/watchlist.class.php';
+require __DIR__ . '/app/database/db.class.php';
+require __DIR__ . '/model/user.class.php';
+require __DIR__ . '/model/movie.class.php';
+require __DIR__ . '/model/rating.class.php';
+require __DIR__ . '/model/comment.class.php';
+require __DIR__ . '/model/watchlist.class.php';
 
     class TekaService{
 
@@ -82,6 +82,8 @@ require __DIR__ . '/watchlist.class.php';
             return $allmovies;
         }
 
+        /*
+
         public function moviesByActor ( $actor )
         {
             $allmovies = [];
@@ -95,6 +97,7 @@ require __DIR__ . '/watchlist.class.php';
             
             return $allmovies;
         }
+        */
 
         public function getComments ( $id_movie )
         {
@@ -268,21 +271,7 @@ require __DIR__ . '/watchlist.class.php';
             $user = new User ($row['id'], $row['username'], $row['password_hash'], $row['email'], $row['registration_sequence'], $row['has_registered']);
 
             return $user->id;
-        }
-
-        public function getAllUsers()
-        {
-            $allusers = [];
-
-            $db = DB::getConnection();
-            $st = $db->prepare( 'SELECT * FROM dz2_users' );
-            $st->execute();
-
-            while( $row = $st->fetch() )
-                $allusers[] = new User( $row['id'], $row['username'], $row['password_hash'], $row['email'], $row['registration_sequence'], $row['has_registered'] );
-            
-            return $allusers;
-        }
+        }        
 
         public function getChannelName( $id )
         {

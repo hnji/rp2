@@ -24,7 +24,7 @@ require_once __DIR__ . '/_header.php';
         </dl>
     <hr>
 
-    <h2> <?php echo $title; ?> </h2>
+    <h2> <?php echo 'title?'; ?> </h2> <!-- echo $title -->
 
 <?php
 require_once __DIR__ . '/_footer.php';

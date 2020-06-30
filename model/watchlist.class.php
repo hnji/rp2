@@ -20,6 +20,20 @@
             
                 return $this;
         }
+
+        public function getWacthlist ( $id_user )
+        {
+            $allmovies = [];
+
+            $db = DB::getConnection();
+            $st = $db->prepare( 'SELECT * FROM watchlist WHERE id_user=:id_user ORDER BY title' );
+            $st->execute( ['id_user' => $id_user] );
+
+            while( $row = $st->fetch() )
+                $allmovies[] = new Watchlist( $row['id'], $row['id_user'], $row['id_movie'], $row['watched'] );
+            
+            return $allmovies;
+        }
     }
 
 ?>
