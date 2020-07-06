@@ -36,7 +36,7 @@ Erase users
 <p>
 Erase comments
 <input type="text" value="search comments">
-<button id="eraseuser">Erase!</button>
+<button id="erasecomment">Erase!</button>
 </p>
 
 

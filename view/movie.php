@@ -37,30 +37,30 @@ echo
             '</p>';
     }
 
-//lista svih reviewova za pojedini film
+//lista svih komentara za pojedini film
 
-    foreach ( $reviewList as $review )
+    foreach ( $commentList as $comment )
     {
         
         echo 
             '<p>' . 
             $users[$i++] . ' ' .
-            $review->date .
+            $comment->date .
             '<br>' .
-            $review->content .
+            $comment->content .
             '<br>' .
             '</p>';
     }
 ?>
 <br>
 <label for="newreview">
-Write a review:
+Write a comment:
 <br>
-<form method="post" action="teka.php?rt=movies/newreview">
+<form method="post" action="teka.php?rt=movies/newcomment">
 <textarea name="content" cols="10" rows="10"></textarea>
 </label>
 <br>
-<button type="submit" name="review">Send your review!</button>
+<button type="submit" name="comment">Send your comment!</button>
 </form>
 
 

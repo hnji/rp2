@@ -3,20 +3,19 @@
 
 <ul> 
 <?php
-//ispis prvih koliko filmova, po kriteriju rating?
+//ispis prvih 5 filmova po kriteriju - na najvise su watchlista
 //koje sve podatke o filmu prikazujemo?
+
+    echo '<ol>';
    foreach( $movieList as $movie ){
     echo
-    '<ol>' . 
     '<li>' .
     $movie->title .
-    '</li>' .
-    '<li>' .
+    '   ' .
     $movie->rating .
-    '</li>' .
-    '</ol>';
-    
+    '</li>';
 }
+    echo '</ol>';
     ?>
         
 </ul>
