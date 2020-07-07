@@ -1,13 +1,13 @@
 <?php
     class Movie{
-        protected $id, $title, $genre, $year, $director, $average_rating;
+        protected $id_movie, $title, $director, $release_year, $genre, $cast, $average_rating;
 
-        public function __construct( $id, $title, $genre, $year, $director, $cast, $average_rating ){
-            $this->id = $id;
+        public function __construct( $id_movie, $title, $director, $release_year, $genre, $cast, $average_rating ){
+            $this->id_movie = $id_movie;
             $this->title = $title;
-            $this->genre = $genre;
-            $this->year = $year;
             $this->director = $director;
+            $this->release_year = $release_year;
+            $this->genre = $genre;
             $this->cast = $cast;
             $this->average_rating = $average_rating;
         }
