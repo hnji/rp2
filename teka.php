@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 if( !isset( $_GET['rt'] ) )
 {
     $controller = 'user';
