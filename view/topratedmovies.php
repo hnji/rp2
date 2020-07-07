@@ -4,18 +4,28 @@
 <ul> 
 <?php
 //ispis 5 najbolje ocijenjenih filmova
-//koje sve podatke o filmu prikazujemo?
 
-    echo '<ol>';
-   foreach( $movieList as $movie ){
+echo '<h3>' . $title . '</h3>';
+
+echo '<ol>';
+foreach( $movieList as $movie )
+{
     echo
     '<li>' .
+    '<form method="post" action="teka.php?rt=movies/movie">' .
+    '<input type="submit" name="movie_title" value="' .
     $movie->title .
-    '   ' .
-    $movie->rating .
+    '" />' .
+    '<input type="hidden" name="movie_id" value="' .
+    $movie->id_movie .
+    '" />' .
+    '</form>' .
+    'Average rating: ' .
+    $movie->average_rating .
+    '<br>' .
     '</li>';
 }
-    echo '</ol>';
+echo '</ol>';
 
     ?>
         

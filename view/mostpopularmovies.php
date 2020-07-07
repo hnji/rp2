@@ -3,19 +3,31 @@
 
 <ul> 
 <?php
-//ispis prvih 5 filmova po kriteriju - na najvise su watchlista
-//koje sve podatke o filmu prikazujemo?
+//ispis 5 filmova koji su na najviše watchlisti - ispisat broj watchlisti?
 
-    echo '<ol>';
-   foreach( $movieList as $movie ){
+echo '<h3>' . $title . '</h3>';
+
+echo '<ol>';
+$i = 0;
+foreach( $movieList as $movie )
+{
     echo
     '<li>' .
+    '<form method="post" action="teka.php?rt=movies/movie">' .
+    '<input type="submit" name="movie_title" value="' .
     $movie->title .
-    '   ' .
-    $movie->rating .
+    '" />' .
+    '<input type="hidden" name="movie_id" value="' .
+    $movie->id_movie .
+    '" />' .
+    '</form>' .
+    'Number of people who put this on their Watchlist: ' .
+    //$nwatchlistsList[$i++] . ' ' . //nešto ne radi baza hehe
+    '<br>' .
     '</li>';
 }
-    echo '</ol>';
+echo '</ol>';
+
     ?>
         
 </ul>

@@ -13,23 +13,26 @@
 </p>
 
 <h4>Watchlist:</h2>
-<ul> 
+<ol> 
 <?php
 
    foreach( $movieList as $movie ){
     echo
-    '<ol>' . 
     '<li>' .
+    '<form method="post" action="teka.php?rt=movies/movie">' .
+    '<input type="submit" name="movie_title" value="' .
     $movie->title .
-    '<br>' .
-    $movie->rating .
-    '</li>' .
-    '</ol>';
+    '" />' .
+    '<input type="hidden" name="movie_id" value="' .
+    $movie->id_movie .
+    '" />' .
+    '</form>' .
+    '</li>';
     
 }
     ?>
         
-</ul>
+</ol>
 
 
 <p>
@@ -71,8 +74,20 @@ Cast:
 </form>
 </p>
 
+<p>
+<h4>Make another user admin to help you take care of Teka</h4>
+<form method="post" action="teka.php?rt=admin/addadmin">
+<input type="text" name="new_admin">
+<button type="submit" name="addadmin">Add admin!</button>
+</form>
+</p>
+<span> <?php echo $info; ?> </span>
+<br>
+
+
 <form method="post" action="teka.php?rt=admin/logout">
 <button type="submit" name="logout">Log out</button>
+
 </form>
 
 <?php require_once __DIR__ . '/_footer.php'; ?>

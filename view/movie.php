@@ -6,16 +6,15 @@
 //sta sve prikazujemo, kojim redom?
 //title, year, genre, director, cast, rating, reviews?
 
+echo '<h3>' . $title . '</h3>';
+
 echo
     '<ul>' . 
-    '<li>' .
-    $movie->title .
-    '</li>' .
-    '<li>Rating: ' .
-    $movie->rating .
+    '<li>Average rating: ' .
+    $movie->average_rating .
     '</li>' .
     '<li>Year: ' .
-    $movie->year .
+    $movie->release_year .
     '</li>' .
     '<li>Genre: ' .
     $movie->genre .
@@ -25,26 +24,37 @@ echo
     '</li>' .
     '</ul>';
 
+echo '<br>';
 
-//cast
+// dodat zastavicu koja provjerava jel to u watchlisti
+echo 
+'<label for="newwatchlist">
+<form method="post" action="teka.php?rt=movies/watchlist">
+<button type="submit" name="watchlist">Add this movie to your Watchlist!</button>
+</label>
+</form>';
+echo '<br>';
+
+echo '<h4>' . 'Cast' . '</h4>';
     foreach ( $castList as $cast )
     {
         
         echo 
             '<p>' . 
-            $cast[$i++] . ' ' .
+            $cast . ' ' .
             '<br>' .
             '</p>';
     }
 
-//lista svih komentara za pojedini film
+echo '<br>';
 
+echo '<h4>' . 'Comments' . '</h4>';
+$i = 0;
     foreach ( $commentList as $comment )
-    {
-        
+    {        
         echo 
             '<p>' . 
-            $users[$i++] . ' ' .
+            $usersList[$i++] . ' ' .
             $comment->date .
             '<br>' .
             $comment->content .
@@ -52,17 +62,20 @@ echo
             '</p>';
     }
 ?>
-<br>
+
+<?php 
+echo '<br>
 <label for="newreview">
 Write a comment:
 <br>
 <form method="post" action="teka.php?rt=movies/newcomment">
-<textarea name="content" cols="10" rows="10"></textarea>
+<textarea name="content" cols="100" rows="10"></textarea>
 </label>
 <br>
 <button type="submit" name="comment">Send your comment!</button>
-</form>
+</form>';
 
-
+?>
 
 <?php require_once __DIR__ . '/_footer.php'; ?>
+

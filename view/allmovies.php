@@ -3,21 +3,30 @@
 
 <ul> 
 <?php
-//ispis svih filmova iz baze
-//koje sve podatke o filmu prikazujemo?
-//abecednim redom?
-   foreach( $movieList as $movie ){
+//svi filmovi - kad klikneš odeš na stranicu filma, al možemo napravit i da na hover se prikažu ostale info
+
+echo '<h3>' . $title . '</h3>';
+
+echo '<ul>';
+foreach( $movieList as $movie )
+{
     echo
-    '<ul>' . 
     '<li>' .
+    '<form method="post" action="teka.php?rt=movies/movie">' .
+    '<input type="submit" name="movie_title" value="' .
     $movie->title .
-    '</li>' .
-    '<li>' .
-    $movie->rating .
-    '</li>' .
-    '</ul>';
-    
+    '" />' .
+    '<input type="hidden" name="movie_id" value="' .
+    $movie->id_movie .
+    '" />' .
+    '</form>' .
+    'Average rating: ' .
+    $movie->average_rating .
+    '<br>' .
+    '</li>';
 }
+echo '</ul>';
+
     ?>
         
 </ul>

@@ -14,6 +14,9 @@
                 <a href="teka.php?rt=movies/search">Search</a>
             </dt>
             <dt>
+                <a href="teka.php?rt=movies/allmovies">All movies</a>
+            </dt>
+            <dt>
                 <a href="teka.php?rt=movies/toprated">Top rated</a>
             </dt>
             <dt>
