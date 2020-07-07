@@ -56,7 +56,7 @@ class userController{
             {
                 // Dobar je. Ulogiraj ga.
                 $y = new TekaService;
-                $row = $y->getUserId();
+                $row = $y->getUserId($_POST['username']);
                 $id = $row['id'];
                 $_SESSION['id_user'] = $id;
                 

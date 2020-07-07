@@ -14,27 +14,40 @@ class adminController{
             require_once __DIR__ . '/../view/signin.php';
         }
             
-
-        //otvori watchlistu 
-        elseif( (int)$_SESSION['admin'] )
+        else
         {
-            $x = new TekaService;
-            $username = $x->getUsername();
+            
+            $info = '';
+            $emptylist = '';
             $title = 'My profile';
+
+            $x = new TekaService;
+            
+            $username = $x->getUsername( $_SESSION['id_user'] );
+            
+            
             $watchList = [];
             $watchList = $x->getWatchlist();
-            $movieList;
+            $movieList = [];
+
+
             for( $i = 0; $i < sizeof($watchList); ++$i )
             {
                $movieList[$i] = $x->getMovie( $watchList[$i]->id_movie );
             }
-            require_once __DIR__ . '/../view/admin.php';
+
+            if ( sizeof($movieList) === 0 ) 
+            {
+                $emptylist = 'Your Watchlist is empty!';
+            }
+
+            if ( (int)$_SESSION['admin'] )
+                require_once __DIR__ . '/../view/admin.php';
+            
+            else
+                require_once __DIR__ . '/../view/myprofile.php';
         }
             
-
-        //otvori watchlistu plus adminske opcije
-        else 
-            require_once __DIR__ . '/../view/myprofile.php';
     }
     
     public function eraseuser(){
@@ -74,14 +87,36 @@ class adminController{
         $x->newMovie();
         require_once __DIR__ . '/../view/newmovie.php';
 
-
-
     }
 
     //fja za dodavanje admina
     public function addadmin()
     {
+        $x = new TekaService;
+        $admin = $x->newAdmin( $_POST['new_admin'] );
+        if ( $admin )
+            $info = 'This user is already admin.';
+        else 
+            $info = 'User ' . $_POST['new_admin'] . ' is now also admin.';
+
+        $title = 'My profile';
+
+        $x = new TekaService;
         
+        $username = $x->getUsername( $_SESSION['id_user'] );
+        
+        
+        $watchList = [];
+        $watchList = $x->getWatchlist();
+        $movieList;
+        for( $i = 0; $i < sizeof($watchList); ++$i )
+        {
+            $movieList[$i] = $x->getMovie( $watchList[$i]->id_movie );
+        }
+        require_once __DIR__ . '/../view/admin.php';
+
+        
+
     }
 
 
