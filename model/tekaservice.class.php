@@ -28,11 +28,11 @@ class TekaService{
 
     }
 
-    public function getUserId()
+    public function getUserId( $username )
     {
             $db = DB::getConnection();
             $st = $db->prepare( 'SELECT id FROM dz4_users WHERE username=:username' );
-            $st->execute( ['username' => $_POST['username']] );
+            $st->execute( ['username' => $username] );
             $row = $st->fetch();
             
             return $row;
@@ -111,6 +111,7 @@ class TekaService{
         catch( PDOException $e ) { exit( "PDO error [dz4_users]: " . $e->getMessage() ); }
 
         // Sad mu još pošalji mail
+        //provjerit dal se mail salje sa studenta
         $to       = $_POST['newemail'];
         $subject  = 'Registracijski mail';
         $message  = 'Poštovani ' . $_POST['newusername'] . "!\nZa dovršetak registracije kliknite na sljedeći link: ";
@@ -129,6 +130,90 @@ class TekaService{
         require_once __DIR__ . '/../view/registracija.php';
         exit();
     }
+
+    public function getMovie( $id_movie )
+    {
+        $db = DB::getConnection();
+        $st = $db->prepare( 'SELECT * FROM dz4_movies WHERE id_movie=:id_movie' );
+        $st->execute( [ 'id_movie' => $id_movie ] );
+        $row = $st->fetch();
+
+        $movie = new Movie( $row['id_movie'], $row['title'], $row['director'], $row['release_year'], $row['genre'], $row['cast'], $row['average_rating'] );
+        return $movie;
+    }
+
+
+    public function getWatchlist ()
+        {
+                $allmovies = [];
+
+                $db = DB::getConnection();
+                $st = $db->prepare( 'SELECT * FROM dz4_watchlist WHERE id_user=:id_user' );
+                $st->execute( ['id_user' => $_SESSION['id_user']] );
+
+                while( $row = $st->fetch() )
+                $allmovies[] = new Watchlist( $row['id'], $row['id_user'], $row['id_movie'], $row['watched'] );
+                
+                return $allmovies;
+        }
+
+        public function getUsername() 
+        {
+            
+            $db = DB::getConnection();
+            $st = $db->prepare( 'SELECT * FROM dz4_users WHERE id=:id' );
+            $st->execute( ['id' => $_SESSION['id_user']] );
+            $row = $st->fetch();
+            $user = new User ($row['id'], $row['username'], $row['password_hash'], $row['email'], $row['registration_sequence'], $row['has_registered'], $row['admin']);
+
+            return $user->username;
+        }
+        // popraviti naredbu za brisanje korisnika
+        public function eraseUser( $id )
+        {
+            $db = DB::getConnection();
+            $st = $db->prepare( 'DELETE FROM dz4_users WHERE id LIKE :id' );
+            $st->execute(['id' => $id]);
+            return;
+
+        }
+
+        public function getCommentId( $content )
+        {
+            $db = DB::getConnection();
+            $st = $db->prepare( 'SELECT id FROM dz4_comments WHERE content=:content' );
+            $st->execute( ['content' => $content] );
+            $row = $st->fetch();
+            
+            return $row;
+        }
+        //komentari se ne brisu, korisnici se brisu???
+        public function eraseComment( $id )
+        {
+            $db = DB::getConnection();
+            $st = $db->prepare( 'DELETE FROM dz4_comments WHERE id LIKE :id' );
+            $st->execute(['id' => $id]);
+            return;
+
+        }
+
+        //broj parametara ne stima???
+        public function newMovie()
+        {
+            $db = DB::getConnection();
+            try{
+                $st = $db->prepare( 'INSERT INTO dz4_movies(title, director, release_year, genre, cast, average_rating) VALUES ' .
+                            '(:title, :director, :release_year, :genre, cast, 0)' );
+                $st->execute( array( 'title' => $_POST['newtitle'], 
+                            'director' => $_POST['newdirector'], 
+                            'release_year' => $_POST['newyear'], 
+                            'genre' => $_POST['newgenre'],
+                            'cast' => $_POST['newcast'] ) );
+            }
+            catch( PDOException $e ) { exit( "PDO error [dz4_comments]: " . $e->getMessage() ); }
+            return;
+        
+        }
 }
 
 ?>

@@ -22,6 +22,9 @@
             <dt>
                 <a href="teka.php?rt=user/signin">Sign in</a>
             </dt>
+            <dt>
+                <a href="teka.php?rt=admin/index">My profile</a>
+            </dt>
         </dl>
     </hr>
     <hr></hr>

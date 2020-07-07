@@ -19,58 +19,66 @@ class userController{
     
     public function login()
     {
-                // Provjeri sastoji li se ime samo od slova; ako ne, crtaj login formu.
-	            if( !isset( $_POST["username"] ) || preg_match( '/[a-zA-Z]{3, 20}/', $_POST["username"] ) )
-                {
-                    $x = new userController;
-                    $x->signin();
-                }
+        // Provjeri sastoji li se ime samo od slova; ako ne, crtaj login formu.
+        if( !isset( $_POST["username"] ) || preg_match( '/[a-zA-Z]{3, 20}/', $_POST["username"] ) )
+        {
+            $x = new userController;
+            $x->signin();
+        }
 
-                // Možda se ne šalje password; u njemu smije biti bilo što.
-                if( !isset( $_POST["password"] ) )
-                {
-                    $x = new userController;
-                    $x->signin();
-                }
-                    
-                $provjera = new TekaService;
-                $row = $provjera->loginUser();
+        // Možda se ne šalje password; u njemu smije biti bilo što.
+        if( !isset( $_POST["password"] ) )
+        {
+            $x = new userController;
+            $x->signin();
+        }
+            
+        $provjera = new TekaService;
+        $row = $provjera->loginUser();
 
-                if( $row === false )
-                {
-                    // Taj user ne postoji, ili nije registriran upit u bazu nije vratio ništa.
-                    $x = new userController;
-                    $x->signin();
-                    return;
-                }
-                else
-                {
+        if( $row === false )
+        {
+            // Taj user ne postoji, ili nije registriran upit u bazu nije vratio ništa.
+            $x = new userController;
+            $x->signin();
+            return;
+        }
 
-                    
-                    // Postoji user. Dohvati hash njegovog passworda.
-                    $hash = $row['password_hash'];
+        else
+        {
 
-                    // Da li je password dobar?
-                    if( password_verify( $_POST['password'], $hash ) )
-                    {
-                        // Dobar je. Ulogiraj ga.
-                        $y = new TekaService;
-                        $_SESSION['id_user'] = $y->getUserId();
-                        $_SESSION['admin'] = $y->isUserAdmin();
-                        
-                        $x = new userController;
-                        $x->index();
-                        
-                        return;
-                    }
-                    else
-                    {
-                        // Nije dobar. Crtaj opet login formu s pripadnom porukom.
-                        $x = new userController;
-                        $x->signin();
-                        return;
-                    }
-                }
+            
+            // Postoji user. Dohvati hash njegovog passworda.
+            $hash = $row['password_hash'];
+
+            // Da li je password dobar?
+            if( password_verify( $_POST['password'], $hash ) )
+            {
+                // Dobar je. Ulogiraj ga.
+                $y = new TekaService;
+                $row = $y->getUserId();
+                $id = $row['id'];
+                $_SESSION['id_user'] = $id;
+                
+                $row = $y->isUserAdmin();
+                $admin = $row['admin'];
+                $_SESSION['admin'] = $admin;
+                
+                
+                $x = new userController;
+                $x->index();
+                
+                return;
+            }
+
+            else
+            {
+                // Nije dobar. Crtaj opet login formu s pripadnom porukom.
+                $x = new userController;
+                $x->signin();
+                return;
+            }
+        }
     }
 
     public function register(){
@@ -102,6 +110,7 @@ class userController{
                 $x->signin();
                 exit();
             }
+
             else if( !filter_var( $_POST['newemail'], FILTER_VALIDATE_EMAIL) ){
                 //$title = 'Register';
                 //echo 'Wrong e-mail address.';
@@ -110,11 +119,13 @@ class userController{
                 $x->signin();
                 exit();
             }
+
             else{
                 $cs = new TekaService;
                 $cs->newUser();
             }  
         }
+
         else{
             //$title = 'Register';
             //require_once __DIR__ . '/../view/register_form.php';
@@ -124,6 +135,8 @@ class userController{
         }
     }
 
+
+    
 }  
 
 ?>
