@@ -5,8 +5,7 @@
     <title>teka</title>
 
     <style>
-        table { border-collapse: collapse; }
-        td, th { border: solid 1px black; }
+        body { font-family: "Trebuschet MS", Helvetica, sans-serif; }
     </style>
 </head>
 <body>
