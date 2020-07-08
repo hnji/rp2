@@ -366,6 +366,33 @@ class TekaService{
         
         return $allmovies;
     }
+
+    public function allGenres()
+    {
+        $allGenres = [];
+
+        $db = DB::getConnection();
+        $st = $db->prepare( 'SELECT DISTINCT genre FROM dz4_movies' );
+        $st->execute();
+
+        while( $row = $st->fetch() )
+        $allGenres[] = $row['genre'];
+        
+        return $allGenres;
+    }
+
+    public function searchByGenre( $genre )
+    {
+        $allmovies = [];
+        $db = DB::getConnection();
+        $st = $db->prepare( 'SELECT * FROM dz4_movies WHERE genre=:genre' );
+        $st->execute( ['genre' => $genre] );
+
+        while( $row = $st->fetch() )
+        $allmovies[] = new Movie($row['id_movie'], $row['title'], $row['director'], $row['release_year'], $row['genre'], $row['cast'], $row['average_rating']);
+        
+        return $allmovies;
+    }
         
 }
 

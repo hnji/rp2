@@ -43,20 +43,39 @@ require_once __DIR__ . '/../model/tekaservice.class.php';
         {
             // ne radi glupi ajax
 
-            if( isset($_POST['txt_year']) )
+            if( isset($_POST['searchyear']) )
             {
                 $year = $_POST['txt_year'];
 
                 $ls = new TekaService;
 
-                $title = 'Search';
+                $title = $year . ' movies';
                 $movieList = $ls->moviesByYear( $year );
 
                 require_once __DIR__ . '/../view/allmovies.php';
             }
+
+            elseif( isset( $_POST['genrebutton'] ) )
+            {
+                
+                $genre = $_POST['genre'];
+                
+                $title = $genre . ' movies';
+                $x = new TekaService;
+                $movieList = [];
+                $movieList = $x->searchByGenre( $genre );
+
+                require_once __DIR__ . '/../view/allmovies.php';
+            }
+
             else
             {
                 $title = 'Search';
+                $genreList = [];
+                $x = new TekaService;
+                $genreList = $x->allGenres();
+
+
                 require_once __DIR__ . '/../view/search.php'; 
             }
 

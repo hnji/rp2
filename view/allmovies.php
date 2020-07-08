@@ -4,10 +4,11 @@
 <ul> 
 <?php
 //svi filmovi - kad klikneš odeš na stranicu filma, al možemo napravit i da na hover se prikažu ostale info
+?>
+<h3> <?php echo $title; ?> </h3>
 
-echo '<h3>' . $title . '</h3>';
-
-echo '<ul>';
+<ul>
+<?php
 foreach( $movieList as $movie )
 {
     echo
@@ -26,10 +27,7 @@ foreach( $movieList as $movie )
     '<br>' .
     '</li>';
 }
-echo '</ul>';
-
-    ?>
-        
+?>
 </ul>
 
 <?php require_once __DIR__ . '/_footer.php'; ?>

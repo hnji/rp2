@@ -21,7 +21,20 @@
 Year: 
 <input type="text" list="datalist_godine" id="txt_year" name="txt_year">
 <datalist id="datalist_godine"></datalist>
-<button type="submit">Search movies!</button>
+<button type="submit" name="searchyear">Search movies!</button>
+<br>
+
+Genre:
+<select name="genre">
+<?php
+foreach( $genreList as $genre )
+{
+	echo '<option value="' . $genre . '">' . $genre . '</option>';
+
+}
+?>
+</select>
+<button type="submit" name="genrebutton">Search movies!</button>
 </form> <!--
 <br>
 Director:
@@ -50,5 +63,5 @@ Director:
     '</ol>';
 }*/
 ?>
-<?php //require_once __DIR__ . '/search.js'; ?>
+
 <?php require_once __DIR__ . '/_footer.php'; ?>
