@@ -27,6 +27,7 @@
         textarea { background-color:#FFE1A8; }
 
     </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 </head>
 <body>
     <h1>teka</h1>
