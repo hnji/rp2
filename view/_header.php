@@ -20,6 +20,9 @@
         ul { list-style: none; }
         button { background-color:#FFE1A8; font-size: 18px; }
         button:hover { background-color:#E26D5C; color: #472D30; }
+        a { color:#723D46; text-decoration: none; }
+        a:hover { color: #472D30; text-decoration: underline; }
+        dt,dd { display:inline; margin-left: 1%; }
 
     </style>
 </head>

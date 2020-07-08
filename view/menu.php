@@ -10,7 +10,7 @@
                 
             </dt>
             <dt>
-                <br>
+                <br><br>
                 <a href="teka.php?rt=movies/search">Search</a>
             </dt>
             <dt>
