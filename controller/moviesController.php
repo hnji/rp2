@@ -31,10 +31,10 @@ require_once __DIR__ . '/../model/tekaservice.class.php';
             $title = 'Most popular movies';
             $movieList = $ls->getPopularMovies();
 
-            //foreach($movieList as $movie)
-            //{
-            //    $nwatchlistsList[] = $ls->getNumberOfWatchlists((int)$movie->id_movie);
-            //}
+            foreach($movieList as $movie)
+            {
+                $nwatchlistsList[] = $ls->getNumberOfWatchlists((int)$movie->id_movie);
+            }
 
             require_once __DIR__ . '/../view/mostpopularmovies.php';
         }

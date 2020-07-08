@@ -271,10 +271,10 @@ class TekaService{
     public function getNumberOfWatchlists( $id_movie )
     {
         $db = DB::getConnection();
-        $st = $db->prepare( 'SELECT id_movie(*) FROM dz4_watchlist WHERE id_movie=:id_movie');
+        $st = $db->prepare( 'SELECT id_movie FROM dz4_watchlist WHERE id_movie=:id_movie');
         $st->execute( ['id_movie' => $id_movie] );
         
-        return $st->fetch();
+        return $st->rowCount();
     }
 
     public function getCast( $id_movie ) 

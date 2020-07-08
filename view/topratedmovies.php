@@ -23,6 +23,7 @@ foreach( $movieList as $movie )
     'Average rating: ' .
     $movie->average_rating .
     '<br>' .
+    '<br>' .
     '</li>';
 }
 echo '</ol>';

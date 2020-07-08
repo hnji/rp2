@@ -21,8 +21,9 @@ foreach( $movieList as $movie )
     $movie->id_movie .
     '" />' .
     '</form>' .
-    //'Number of people who put this on their Watchlist: ' .
-    //$nwatchlistsList[$i++] . ' ' . //nešto ne radi baza hehe
+    'Number of people who put have on their Watchlist: ' .
+    $nwatchlistsList[$i++] . ' ' .
+    '<br>' .
     '<br>' .
     '</li>';
 }
