@@ -26,14 +26,17 @@ echo
 
 echo '<br>';
 
-// dodat zastavicu koja provjerava jel to u watchlisti
-echo 
-'<label for="newwatchlist">
-<form method="post" action="teka.php?rt=movies/watchlist">
-<button type="submit" name="watchlist">Add this movie to your Watchlist!</button>
-</label>
-</form>';
-echo '<br>';
+if( !$isOnWatchlist )
+{
+    echo 
+    '<label for="newwatchlist">
+    <form method="post" action="teka.php?rt=movies/watchlist">
+    <button type="submit" name="watchlist">Add this movie to your Watchlist!</button>
+    </label>
+    </form>';
+    echo '<br>';
+}
+
 
 echo '<h4>' . 'Cast' . '</h4>';
     foreach ( $castList as $cast )

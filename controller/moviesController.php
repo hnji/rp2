@@ -68,15 +68,31 @@ require_once __DIR__ . '/../model/tekaservice.class.php';
             if( !isset( $_SESSION['id_movie'] ) )
                 $_SESSION['id_movie'] = $_POST['movie_id'];
 
-           /* if( isset( $_SESSION['admin'] ) )
+            if( isset( $_SESSION['admin'] ) )
             {
-                $ls = new TekaService;
+                if (isset($_POST['movie_id']))
+                {
+                    $ls = new TekaService;
 
-                $id_m = (int)$_SESSION['id_movie'];
-                $id_u = (int)$_SESSION['id_user'];
-                echo 'idjevi: ' . $id_m . $id_u;
-                echo 'tu san: ' . $ls->isMovieOnWatchlist( $id_m, $id_u );
-            }*/
+                    $id_m = (int)$_POST['movie_id'];
+                    $id_u = (int)$_SESSION['id_user'];
+
+                    //echo 'idjevi: ' . $id_m . $id_u;
+                    //echo 'tu san: ' . $ls->isMovieOnWatchlist( $id_m, $id_u );
+
+                    $isOnWatchlist = $ls->isMovieOnWatchlist( $id_m, $id_u );
+                }
+                else
+                {
+                    $ls = new TekaService;
+
+                    $id_m = (int)$_SESSION['id_movie'];
+                    $id_u = (int)$_SESSION['id_user'];
+                    
+                    $isOnWatchlist = $ls->isMovieOnWatchlist( $id_m, $id_u );
+                }
+
+            }
             
            
             if( isset($_POST["movie_title"]) && isset($_POST["movie_id"]) )

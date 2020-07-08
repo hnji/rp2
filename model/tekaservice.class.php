@@ -345,10 +345,11 @@ class TekaService{
     public function isMovieOnWatchlist( $id_movie, $id_user )
     {
         $db = DB::getConnection();
-        $st = $db->prepare( 'SELECT * FROM dz4_watchlist WHERE id_user=:id_user AND id_movie=:id_movie');
+        $st = $db->prepare( 'SELECT EXISTS ( SELECT 1 FROM dz4_watchlist WHERE id_user=:id_user AND id_movie=:id_movie )');
         $st->execute( array( 'id_user' => $id_user, 'id_movie' => $id_movie ) );
         
-        return $st->rowCount();
+        $row = $st->fetch();
+        return $row[0];
          
     }
 
