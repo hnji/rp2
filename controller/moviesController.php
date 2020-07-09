@@ -84,6 +84,13 @@ require_once __DIR__ . '/../model/tekaservice.class.php';
 
         public function movie()
         {
+            $id_u = -1;
+            if( isset($_POST['movie_id']))
+                $id_m_js = $_POST['movie_id'];
+            else if(isset($_SESSION['id_movie'] ))
+                $id_m_js = $_SESSION['id_movie'];
+
+                
             if( !isset( $_SESSION['id_movie'] ) )
                 $_SESSION['id_movie'] = $_POST['movie_id'];
 
@@ -112,6 +119,8 @@ require_once __DIR__ . '/../model/tekaservice.class.php';
                 }
 
             }
+            else
+                $isOnWatchlist = 1;
             
            
             if( isset($_POST["movie_title"]) && isset($_POST["movie_id"]) )
@@ -135,6 +144,11 @@ require_once __DIR__ . '/../model/tekaservice.class.php';
                     $usersList[] = $ls->getUsername($comment->id_user);
                 }
 
+                if( isset($_SESSION['id_user'] ) )
+                    $rating = $ls->getRating( $id );
+                else
+                    $rating = -2;
+
                 require_once __DIR__ . '/../view/movie.php';
             }
             else
@@ -156,10 +170,10 @@ require_once __DIR__ . '/../model/tekaservice.class.php';
                     $usersList[] = $ls->getUsername($comment->id_user);
                 }
 
+                $rating = -2;
+
                 require_once __DIR__ . '/../view/movie.php';
             }
-
-        
         }
         
         // kad je movielist prazan???

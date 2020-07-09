@@ -393,6 +393,47 @@ class TekaService{
         
         return $allmovies;
     }
+    public function getRating( $id_movie )
+    {
+        $db = DB::getConnection();
+        $st = $db->prepare( 'SELECT * FROM dz4_ratings WHERE id_movie=:id_movie AND id_user=:id_user' );
+        $st->execute( ['id_movie' => $id_movie, 'id_user' => $_SESSION['id_user']] );
+
+        $row = $st->fetch();
+
+        if( $st->rowCount() !== 0 )
+            return $row['rating'];
+        else return -1;
+    }
+    
+    public function changeRating( $ocjena, $user_id, $movie_id )
+    {
+        $db = DB::getConnection();
+        $st = $db->prepare( 'SELECT EXISTS ( SELECT 1 FROM dz4_ratings WHERE id_user=:id_user AND id_movie=:id_movie )');
+        $st->execute( array( 'id_user' => $user_id, 'id_movie' => $movie_id ) );
+        
+        $row = $st->fetch();
+        
+        if( !$row[0] )
+        {
+            try{
+                $st_insert = $db->prepare( 'INSERT INTO dz4_ratings (id_user, id_movie, rating) VALUE (:id_user, :id_movie, :rating)');
+                $st_insert->execute( array( 'id_user' => $user_id, 'id_movie' => $movie_id, 'rating' => $ocjena ) );
+            }
+            catch( PDOException $e ) { exit( "PDO error [dz4_ratings]: " . $e->getMessage() ); }
+
+        }
+        else
+        {
+            try{
+                $st_insert = $db->prepare( 'UPDATE dz4_ratings SET rating=:rating WHERE id_user=:id_user AND id_movie=:id_movie');
+                $st_insert->execute( array( 'id_user' => $user_id, 'id_movie' => $movie_id, 'rating' => $ocjena ) );
+            }
+            catch( PDOException $e ) { exit( "PDO error [dz4_ratings]: " . $e->getMessage() ); }
+            
+        }
+
+    } 
         
 }
 
