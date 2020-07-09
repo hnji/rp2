@@ -20,6 +20,7 @@ class adminController{
             $info = '';
             $emptylist = '';
             $title = 'My profile';
+            $emptyratings = '';
 
             $x = new TekaService;
             
@@ -39,6 +40,18 @@ class adminController{
             if ( sizeof($movieList) === 0 ) 
             {
                 $emptylist = 'Your Watchlist is empty!';
+            }
+
+            $ratedMoviesList = $x->getAllRatedMovies();
+
+            if( sizeof($ratedMoviesList) === 0)
+            {
+                $emptyratings = "You haven't rated any movies!";
+            }
+
+            for( $i = 0; $i < sizeof($ratedMoviesList); ++$i )
+            {
+               $ratingsList[$i] = $x->getRating( $ratedMoviesList[$i]->id_movie );
             }
 
             if ( (int)$_SESSION['admin'] )

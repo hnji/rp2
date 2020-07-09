@@ -34,6 +34,36 @@
         
 </ol>
 
+<?php
+echo '<h4>Your ratings:</h4>';
+
+if( $emptyratings === "You haven't rated any movies!" )
+    echo $emptyratings;
+else
+{
+    echo '<ul>'; 
+$i = 0;
+   foreach( $ratedMoviesList as $movie )
+   {
+        echo
+        '<li>' .
+        '<form method="post" action="teka.php?rt=movies/movie">' .
+        '<input type="submit" name="movie_title" value="' .
+        $movie->title .
+        '" />' .
+        '<input type="hidden" name="movie_id" value="' .
+        $movie->id_movie .
+        '" />' .
+        '</form>' .
+        'Your rating: ' .
+        $ratingsList[$i++] .
+        '</li>';
+    }
+
+    echo '</ul>';    
+}
+?>
+
 
 <p>
 <h4>Add a new movie</h4>
