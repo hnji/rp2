@@ -18,6 +18,7 @@ $( document ).ready( function()
             },
             success: function( data )
             {
+                $( "#datalist_search" ).empty();
                 
                 // Jednostavno sve što dobiješ od servera stavi u dataset.
                 for ( var i = 0; i < data.movies.length; ++i )
