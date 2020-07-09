@@ -516,6 +516,23 @@ class TekaService{
         }
         catch( PDOException $e ) { exit( "PDO error [dz4_ratings]: " . $e->getMessage() ); }
     }
+
+    public function getAllRatedMovies()
+    {
+        $db = DB::getConnection();
+
+        $st = $db->prepare( 'SELECT id_movie FROM dz4_ratings WHERE id_user=:id_user' );
+        $st->execute( ['id_user' => $_SESSION['id_user'] ] );
+
+        $movieList = [];
+
+        $ls = new TekaService;
+
+        while( $row = $st->fetch() )
+            $movieList[] = $ls->getMovie( $row['id_movie'] );
+        
+        return $movieList;
+    }
 }
 
 ?>
