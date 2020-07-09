@@ -405,6 +405,19 @@ class TekaService{
             return $row['rating'];
         else return -1;
     }
+
+    public function getRatingOfUser( $id_movie, $id_user) // potrebno za changeRating.php
+    {
+        $db = DB::getConnection();
+        $st = $db->prepare( 'SELECT * FROM dz4_ratings WHERE id_movie=:id_movie AND id_user=:id_user' );
+        $st->execute( ['id_movie' => $id_movie, 'id_user' => $id_user ] );
+
+        $row = $st->fetch();
+
+        if( $st->rowCount() !== 0 )
+            return $row['rating'];
+        else return -1;
+    }
     
     public function changeRating( $ocjena, $user_id, $movie_id )
     {

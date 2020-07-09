@@ -191,9 +191,9 @@ require_once __DIR__ . '/../model/tekaservice.class.php';
                 }
 
                 if( isset($_SESSION['id_user'] ) )
-                    $rating = $ls->getRating( $id );
+                    $rating = $ls->getRating( $id ); // vraća rating ili -1 ako user nije ocijenio film
                 else
-                    $rating = -2;
+                    $rating = -2; // korisnik nije log in-an
 
                 require_once __DIR__ . '/../view/movie.php';
             }
@@ -216,7 +216,7 @@ require_once __DIR__ . '/../model/tekaservice.class.php';
                     $usersList[] = $ls->getUsername($comment->id_user);
                 }
 
-                $rating = -2;
+                $rating = -2; // korisnik nije log in-an
 
                 require_once __DIR__ . '/../view/movie.php';
             }
