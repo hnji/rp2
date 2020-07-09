@@ -10,8 +10,12 @@ echo '<h3>' . $title . '</h3>';
 
 echo
     '<ul>' . 
-    '<li>Average rating: ' .
-    $movie->average_rating .
+    '<li>Average rating: ';
+    if( (int) $movie->average_rating === -1)
+        echo 'No one has rated this movie yet!';
+    else 
+        echo $movie->average_rating;
+echo
     '</li>' .
     '<li>Year: ' .
     $movie->release_year .

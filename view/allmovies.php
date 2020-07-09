@@ -21,8 +21,12 @@ foreach( $movieList as $movie )
     $movie->id_movie .
     '" />' .
     '</form>' .
-    'Average rating: ' .
-    $movie->average_rating .
+    'Average rating: ' ;
+    if( (int) $movie->average_rating === -1)
+        echo 'No one has rated this movie yet!';
+    else 
+        echo $movie->average_rating;
+    echo
     '<br>' .
     '<br>' .
     '</li>';

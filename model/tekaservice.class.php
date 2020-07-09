@@ -419,6 +419,10 @@ class TekaService{
             try{
                 $st_insert = $db->prepare( 'INSERT INTO dz4_ratings (id_user, id_movie, rating) VALUE (:id_user, :id_movie, :rating)');
                 $st_insert->execute( array( 'id_user' => $user_id, 'id_movie' => $movie_id, 'rating' => $ocjena ) );
+
+                $ls = new TekaService;
+                $ls->updateAverageRating($movie_id, $ls->getAverageRating($movie_id));
+
             }
             catch( PDOException $e ) { exit( "PDO error [dz4_ratings]: " . $e->getMessage() ); }
 
@@ -428,6 +432,9 @@ class TekaService{
             try{
                 $st_insert = $db->prepare( 'UPDATE dz4_ratings SET rating=:rating WHERE id_user=:id_user AND id_movie=:id_movie');
                 $st_insert->execute( array( 'id_user' => $user_id, 'id_movie' => $movie_id, 'rating' => $ocjena ) );
+
+                $ls = new TekaService;
+                $ls->updateAverageRating($movie_id, $ls->getAverageRating($movie_id));
             }
             catch( PDOException $e ) { exit( "PDO error [dz4_ratings]: " . $e->getMessage() ); }
             
@@ -477,6 +484,37 @@ class TekaService{
             require_once __DIR__ . '/../view/uspjesna_registracija.php';
             exit();
         }
+    }
+
+    public function getAverageRating( $id_movie )
+    {
+        $db = DB::getConnection();
+
+        $st = $db->prepare( 'SELECT rating FROM dz4_ratings WHERE id_movie=:id_movie' );
+        $st->execute( ['id_movie' => $id_movie ] );
+
+        $n = 0;
+        $rating_sum = 0;
+        while( $row = $st->fetch() )
+        {
+            $rating_sum += $row['rating'];
+            $n++;
+        }
+        
+        if( $n === 0 )
+            return -1;
+        else return $rating_sum / $n;
+    }
+
+    public function updateAverageRating( $id_movie, $average_rating )
+    {
+        $db = DB::getConnection();
+
+        try{
+            $st = $db->prepare( 'UPDATE dz4_movies SET average_rating=:average_rating WHERE id_movie=:id_movie');
+            $st->execute( array( 'average_rating' => $average_rating, 'id_movie' => $id_movie ) );
+        }
+        catch( PDOException $e ) { exit( "PDO error [dz4_ratings]: " . $e->getMessage() ); }
     }
 }
 
