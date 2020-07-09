@@ -135,6 +135,11 @@ class userController{
         }
     }
 
+    public function verifyUser(){
+        $cs = new TekaService;
+        $user = $cs->getUser();
+    }
+
 
     
 }  

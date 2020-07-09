@@ -451,6 +451,33 @@ class TekaService{
 
     }
         
+
+    public function getUser(){
+        $db = DB::getConnection();
+
+        try{
+        $st = $db->prepare( 'SELECT * FROM dz4_users WHERE registration_sequence=:registration_sequence' );
+        $st->execute( ['registration_sequence' => $_SESSION['niz'] ] );
+        }
+        catch( PDOException $e ) { exit( "PDO error [dz4_users]: " . $e->getMessage() ); }
+
+        $row = $st->fetch();
+
+        if( $st->rowCount() !== 1 )
+            exit();
+        else{
+
+            try{
+            $st = $db->prepare( 'UPDATE dz4_users SET has_registered=1 WHERE registration_sequence=:registration_sequence');
+            $st->execute( ['registration_sequence' => $_SESSION['niz'] ] );
+            }
+            catch( PDOException $e ) { exit( "PDO error [dz4_users]: " . $e->getMessage() ); }
+
+            $title = 'Register';
+            require_once __DIR__ . '/../view/uspjesna_registracija.php';
+            exit();
+        }
+    }
 }
 
 ?>

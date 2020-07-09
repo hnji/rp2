@@ -4,12 +4,18 @@
 
 session_start();
 
-if( !isset( $_GET['rt'] ) )
+if( !isset( $_GET['rt'] ) && !isset( $_GET['niz'] ) )
 {
     $controller = 'user';
     $action = 'index';
 }
 
+elseif( isset( $_GET['niz'] ) ){
+    $controller = 'user';
+    $action = 'verifyUser';
+
+    $_SESSION['niz'] = $_GET['niz'];
+}
 
 else{
     $parts = explode( '/', $_GET['rt'] );
