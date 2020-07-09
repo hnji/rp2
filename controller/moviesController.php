@@ -48,11 +48,17 @@ require_once __DIR__ . '/../model/tekaservice.class.php';
             {
                 $year = $_POST['txt_year'];
 
-                echo preg_match( '/[0-9]{4}/', $year );
+                //echo preg_match( '/[0-9]{4}/', $year );
 
                 if ( !preg_match( '/[0-9]{4}/', $year ) )
                 {
                     
+                    $title = 'Search';
+                    $genreList = [];
+                    $x = new TekaService;
+                    $genreList = $x->allGenres();
+
+
                     require_once __DIR__ . '/../view/search.php';
                 }
                     
