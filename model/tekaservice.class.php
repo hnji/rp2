@@ -434,6 +434,22 @@ class TekaService{
         }
 
     } 
+
+    public function moviesByTitle( $title )
+    {
+        $allmovies = [];
+        $db = DB::getConnection();
+        $st = $db->prepare( 'SELECT * FROM dz4_movies WHERE title=:title' );
+        $st->execute( ['title' => $title] );
+
+        while( $row = $st->fetch() )
+            $allmovies[] = new Movie($row['id_movie'], $row['title'], $row['director'], $row['release_year'], $row['genre'], $row['cast'], $row['average_rating']);
+        
+        return $allmovies;
+
+
+
+    }
         
 }
 

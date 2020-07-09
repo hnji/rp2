@@ -68,6 +68,32 @@ require_once __DIR__ . '/../model/tekaservice.class.php';
                 require_once __DIR__ . '/../view/allmovies.php';
             }
 
+            elseif( isset( $_POST['byname'] ) )
+            {
+                
+                $x = new TekaService;
+                $title = $_POST['search_input'];
+                $movieList = $x->moviesByTitle( $title );
+
+                // s GET-om umisto POST-a funkcionira tkd je problem negdi drugo
+                
+                if ( sizeof( $movieList ) === 1 )
+                {
+                    
+                    $_POST['movie_id'] = $movieList->$id_movie;
+                    $_POST["movie_title"] = $movieList->title;
+                    require_once __DIR__ . '/../view/movie.php';
+                }
+
+                else
+                {
+                    $title = 'search';
+                    require_once __DIR__ . '/../view/allmovies.php';
+
+                }
+                
+            }
+
             else
             {
                 $title = 'Search';

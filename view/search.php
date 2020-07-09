@@ -18,12 +18,14 @@
 -->
 <br>
 <form method='post' action='teka.php?rt=movies/search'>
+<p>
 Year: 
 <input type="text" list="datalist_godine" id="txt_year" name="txt_year">
 <datalist id="datalist_godine"></datalist>
 <button type="submit" name="searchyear">Search movies!</button>
-<br>
+</p>
 
+<p>
 Genre:
 <select name="genre">
 <?php
@@ -35,6 +37,7 @@ foreach( $genreList as $genre )
 ?>
 </select>
 <button type="submit" name="genrebutton">Search movies!</button>
+</p>
 </form> <!--
 <br>
 Director:

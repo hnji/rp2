@@ -5,10 +5,12 @@
     <hr>
         <dl>
             <dt>
-            <input type="text" value="search movies" list="datalist_search" id="txt_search">
-                <datalist id="datalist_search"></datalist>
-                <button type="submit">Search!</button>
+            <form method="get" action="teka.php?rt=movies/search">
+            <input type="text" name="search_input" list="datalist_search" id="txt_search">
                 
+            <datalist id="datalist_search"></datalist>
+            <button type="submit" name="byname">Search!</button>
+            </form>
             </dt>
             <dt>
                 <br><br>
@@ -34,3 +36,4 @@
     <hr>
 
     <script src="searchSuggest.js"></script>
+    
