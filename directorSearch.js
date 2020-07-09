@@ -1,5 +1,7 @@
 
 
+
+
 $( document ).ready( function()
 {
     var txt = $( "#director_search" );
@@ -24,15 +26,18 @@ $( document ).ready( function()
                 
                 
                 // Jednostavno sve što dobiješ od servera stavi u dataset.
-                for ( var i = 0; i < data.directors.length; ++i )
+                for ( var i = 0; i < data.length; ++i )
                 {
                     
                     var option = $( '<option></option>' );
-                    option.attr( 'value', data.directors[i].director );
+                    option.attr( 'value', data[i] );
+                    //option.attr( 'id', data.directors[i].id_movie );
                     //$option.attr( 'value', i );
                     //$( "#datalist_director" ).append($( '<option value="' + i + '">' + i + '</option>' ));
                     //append( $option );
                     $( "#datalist_director" ).append( option );
+
+
                 }
                     
             },
@@ -44,3 +49,51 @@ $( document ).ready( function()
         } );
     } );
 } );
+
+
+function search()
+{
+    var txt = $( "#director_search" );
+    var unos = txt.val(); 
+
+    $.ajax(
+        {
+            method: 'get',
+            url: "moviesbydirector.php",
+            data:
+            {
+                q: unos
+            },
+            success: function( data )
+            {
+                $( '#movies' ).empty;
+                var lista = $( '<ol></ol>' );
+                $( '#movies' ).append( $( '<h3>' + unos + ' movies:</h3>' ) );
+                
+                // Jednostavno sve što dobiješ od servera stavi u dataset.
+                for ( var i = 0; i < data.title.length; ++i )
+                {
+                    console.log(data.title[i]);
+                    var li = $( '<li>' + data.title[i] + '</li>' );
+                    console.log(li);
+                    li.attr( 'id', data.id_movie[i] );
+                    //$option.attr( 'value', i );
+                    //$( "#datalist_director" ).append($( '<option value="' + i + '">' + i + '</option>' ));
+                    //append( $option );
+                    lista.append( li );
+
+
+                }
+
+                $( '#movies' ).append( lista );
+                    
+            },
+            error: function( xhr, status )
+            {
+                if( status !== null )
+                    console.log( "Greška prilikom Ajax poziva: " + status );
+            }
+        } );
+
+
+}

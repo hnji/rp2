@@ -68,10 +68,13 @@ sendJSONandExit( $message );
 
 	
     // Dohvati sve dionice
-    $st = $db->prepare( "SELECT DISTINCT director FROM dz4_movies" );
+    $st = $db->prepare( "SELECT * FROM dz4_movies" );
+    //$st->execute( array( 'director' => $q ) );
     $st->execute();
 
     $message = [];
+    $message['title'] = [];
+    $message['id_movie'] = [];
     //$message[ 'vrijemeZadnjegPristupa' ] = $timestamp;
     
 
@@ -79,9 +82,12 @@ sendJSONandExit( $message );
     {
         //echo $q;
         //echo $row['title'];
-        $director = strtolower( $row['director'] );
-        if( strpos( $director, $q ) !== false )
-          $message[] = $row['director'];			
+        if( $q === $row['director'] )
+        {
+            $message['id_movie'][] = $row['id_movie'];
+            $message['title'][] = $row['title'];
+        }
+        			
     }
                                                                                                                             
 

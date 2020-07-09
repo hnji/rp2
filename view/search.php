@@ -43,7 +43,7 @@ foreach( $genreList as $genre )
 Director:
 <input type="text" name="search_input" list="datalist_director" id="director_search"> 
 <datalist id="datalist_director"></datalist>
-<button type="submit" name="bydirector">Search!</button>
+<button type="submit" name="bydirector" onclick="search()">Search!</button>
 </p>
 
 
