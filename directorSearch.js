@@ -66,7 +66,7 @@ function search()
             },
             success: function( data )
             {
-                $( '#movies' ).empty;
+                $( '#movies' ).html( '' );
                 var lista = $( '<ol></ol>' );
                 $( '#movies' ).append( $( '<h3>' + unos + ' movies:</h3>' ) );
                 
