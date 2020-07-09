@@ -41,18 +41,32 @@ require_once __DIR__ . '/../model/tekaservice.class.php';
 
         public function search()
         {
+         
             // ne radi glupi ajax
 
             if( isset($_POST['searchyear']) )
             {
                 $year = $_POST['txt_year'];
 
-                $ls = new TekaService;
+                echo preg_match( '/[0-9]{4}/', $year );
 
-                $title = $year . ' movies';
-                $movieList = $ls->moviesByYear( $year );
+                if ( !preg_match( '/[0-9]{4}/', $year ) )
+                {
+                    
+                    require_once __DIR__ . '/../view/search.php';
+                }
+                    
+                else
+                {
+                    
+                    $ls = new TekaService;
 
-                require_once __DIR__ . '/../view/allmovies.php';
+                    $title = $year . ' movies';
+                    $movieList = $ls->moviesByYear( $year );
+
+                    require_once __DIR__ . '/../view/allmovies.php';
+                }
+                
             }
 
             elseif( isset( $_POST['genrebutton'] ) )
