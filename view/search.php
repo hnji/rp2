@@ -38,20 +38,16 @@ foreach( $genreList as $genre )
 </select>
 <button type="submit" name="genrebutton">Search movies!</button>
 </p>
-</form> <!--
-<br>
+</form>
+<p>
 Director:
-<select id="director">
-			<option value="1"></option>
-			<option value="2"></option>
-			<option value="3"></option>
-			<option value="4"></option>
-			<option value="5"></option>
-			<option value="6"></option>
-</select>-->
-<br>
+<input type="text" name="search_input" list="datalist_director" id="director_search"> 
+<datalist id="datalist_director"></datalist>
+<button type="submit" name="bydirector">Search!</button>
+</p>
 
 
+<div id="movies"></div>
 
 <?php
    /*foreach( $movieList as $movie ){
@@ -67,4 +63,6 @@ Director:
 }*/
 ?>
 
+
+<script src="directorSearch.js"></script>
 <?php require_once __DIR__ . '/_footer.php'; ?>

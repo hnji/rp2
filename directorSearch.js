@@ -1,6 +1,8 @@
+
+
 $( document ).ready( function()
 {
-    var txt = $( "#txt_search" );
+    var txt = $( "#director_search" );
 
     // Kad netko nešto tipka u text-box:
     txt.on( "input", function(e)
@@ -11,21 +13,26 @@ $( document ).ready( function()
         $.ajax(
         {
             method: 'get',
-            url: "searchSuggest.php",
+            url: "directorSearch.php",
             data:
             {
                 q: unos
             },
             success: function( data )
             {
-                $( "#datalist_search" ).empty();
+                $( "#datalist_director" ).empty();
+                
                 
                 // Jednostavno sve što dobiješ od servera stavi u dataset.
-                for ( var i = 0; i < data.movies.length; ++i )
+                for ( var i = 0; i < 5; ++i )
                 {
-                    var option = $( '<option></option>' );
-                    option.attr( 'value', data.movies[i].title );
-                    $( "#datalist_search" ).append( $option );
+                    
+                    var option = $( '<option>' + data.directors[i].director + '</option>' );
+                    option.attr( 'value', data.directors[i].director );
+                    //$option.attr( 'value', i );
+                    //$( "#datalist_director" ).append($( '<option value="' + i + '">' + i + '</option>' ));
+                    //append( $option );
+                    $( "#datalist_director" ).append( option );
                 }
                     
             },
