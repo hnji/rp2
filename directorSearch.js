@@ -24,10 +24,10 @@ $( document ).ready( function()
                 
                 
                 // Jednostavno sve što dobiješ od servera stavi u dataset.
-                for ( var i = 0; i < 5; ++i )
+                for ( var i = 0; i < data.directors.length; ++i )
                 {
                     
-                    var option = $( '<option>' + data.directors[i].director + '</option>' );
+                    var option = $( '<option></option>' );
                     option.attr( 'value', data.directors[i].director );
                     //$option.attr( 'value', i );
                     //$( "#datalist_director" ).append($( '<option value="' + i + '">' + i + '</option>' ));
