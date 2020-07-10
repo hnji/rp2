@@ -197,6 +197,33 @@ require_once __DIR__ . '/../model/tekaservice.class.php';
 
                 require_once __DIR__ . '/../view/movie.php';
             }
+            else if( isset($_SESSION['id_user']) && isset($_SESSION['id_movie']) )
+            {
+                $user = $_SESSION['id_user'];
+
+                $id = $_SESSION['id_movie'];
+
+                $ls = new TekaService;
+
+                $movie = $ls->getMovie( $id );
+
+                $title = $movie->title;
+
+                $caststr = $ls->getCast( $id );
+                $castList = explode( ',', $caststr );
+
+                $commentList = $ls->getComments( $id );
+
+                foreach($commentList as $comment)
+                {
+                    $usersList[] = $ls->getUsername($comment->id_user);
+                }
+
+                $rating = $ls->getRating( $id ); // vraća rating ili -1 ako user nije ocijenio film
+
+
+                require_once __DIR__ . '/../view/movie.php';
+            }
             else
             {
                 $id_movie = (int) $_SESSION['id_movie'];
@@ -221,8 +248,7 @@ require_once __DIR__ . '/../model/tekaservice.class.php';
                 require_once __DIR__ . '/../view/movie.php';
             }
         }
-        
-        // kad je movielist prazan???
+
 
         public function newcomment() //writeNewComment($id_movie, $id_user, $content)
         {

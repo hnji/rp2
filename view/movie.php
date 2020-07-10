@@ -62,6 +62,7 @@ if( $rating !== -2 )
     }
     else
     {
+        echo 'Your rating: ' . '<span id="js_yourrating">' . "You haven't rated this movie!". '</span>';
         echo '
         <h4>Rate this movie:</h4>
         <input type="radio" id="0" name="rating" value="0" class="rating">
@@ -153,43 +154,6 @@ echo
     '" />';
 ?>
 
-    <script>
-
-$( document ).ready( function()
-{
-    var btn = $( "#rate" );
-
-    // Kad netko nešto tipka u text-box:
-    btn.on( "click", function(e)
-    {
-        var ocjena = $( ".rating:checked" ).val(); // this = HTML element input, $(this) = jQuery objekt
-        var user_id = $( "#js_user_id").val();
-        var movie_id = $( "#js_movie_id").val();
-
-        $.ajax(
-        {
-            method: 'get',
-            url: "changeRating.php",
-            data:
-            {
-                ocjena: ocjena,
-                user_id: user_id,
-                movie_id: movie_id
-            },
-            success: function( data )
-            {
-                $( "#js_averagerating" ).html( data.average );
-                $( "#js_yourrating" ).html( data.your ); 
-            },
-            error: function( xhr, status )
-            {
-                if( status !== null )
-                    console.log( "Greška prilikom Ajax poziva: " + status );
-            }
-        } );
-    } );
-} );
-
-</script>
+<script src="changeRating.js"></script>
 
 <?php require_once __DIR__ . '/_footer.php'; ?>

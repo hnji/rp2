@@ -183,7 +183,7 @@ class TekaService{
             $st->execute( ['content' => $content] );
             $row = $st->fetch();
             
-            return $row;
+            return $row['content'];
         }
         //komentari se ne brisu, korisnici se brisu???
         public function eraseComment( $id )
