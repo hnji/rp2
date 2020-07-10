@@ -4,14 +4,17 @@
 
     <hr>
         <dl>
+        <!---
             <dt>
+            
             <form method="get" action="teka.php?rt=movies/search">
             <input type="text" name="search_input" list="datalist_search" id="txt_search">
                 
             <datalist id="datalist_search"></datalist>
             <button type="submit" name="byname">Search!</button>
             </form>
-            </dt>
+
+            </dt> --->
             <dt>
                 <br><br>
                 <a href="teka.php?rt=movies/search">Search</a>
