@@ -20,7 +20,6 @@ class adminController{
             $info = '';
             $emptylist = '';
             $title = 'My profile';
-            $emptyratings = '';
 
             $x = new TekaService;
             
@@ -40,18 +39,6 @@ class adminController{
             if ( sizeof($movieList) === 0 ) 
             {
                 $emptylist = 'Your Watchlist is empty!';
-            }
-
-            $ratedMoviesList = $x->getAllRatedMovies();
-
-            if( sizeof($ratedMoviesList) === 0)
-            {
-                $emptyratings = "You haven't rated any movies!";
-            }
-
-            for( $i = 0; $i < sizeof($ratedMoviesList); ++$i )
-            {
-               $ratingsList[$i] = $x->getRating( $ratedMoviesList[$i]->id_movie );
             }
 
             if ( (int)$_SESSION['admin'] )
@@ -142,6 +129,7 @@ class adminController{
 
         require_once __DIR__ . '/../view/_header.php';
         require_once __DIR__ . '/../view/menu.php';
+        echo '<h1>Welcome to Teka - your favourite movies database!</h1>';
         require_once __DIR__ . '/../view/_footer.php';
 
     }

@@ -9,6 +9,7 @@ class userController{
     {
         require_once __DIR__ . '/../view/_header.php';
         require_once __DIR__ . '/../view/menu.php';
+        echo '<h1>Welcome to Teka - your favourite movies database!</h1>';
         require_once __DIR__ . '/../view/_footer.php';
     }
 
