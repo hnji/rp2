@@ -1,5 +1,57 @@
 
+function search()
+{
+    var txt = $( "#director_search" );
+    var unos = txt.val(); 
 
+    $.ajax(
+        {
+            method: 'get',
+            url: "moviesbydirector.php",
+            data:
+            {
+                q: unos
+            },
+            success: function( data )
+            {
+                $( '#movies' ).html( '' );
+                if( !data.title.length )
+                    alert( 'There is no director ' + unos + ' in database.' );
+                //var lista = $( '<ol></ol>' );
+                else
+                {
+                    $( '#movies' ).append( $( '<h3>' + unos + ' movies:</h3>' ) );
+                
+                // Jednostavno sve što dobiješ od servera stavi u dataset.
+                    for ( var i = 0; i < data.title.length; ++i )
+                    {
+                        //console.log(data.title[i]);
+                        var li = $( '<div class="movie_title" onmouseenter="prikaziInfo()" onmouseleave="sakrijInfo()">' + (i+1) + '. ' + data.title[i] + '</div>' );
+                        //console.log(li);
+                        li.prop( 'id', data.id_movie[i] );
+                        //console.log( data.id_movie[i] );
+                        //$option.attr( 'value', i );
+                        //$( "#datalist_director" ).append($( '<option value="' + i + '">' + i + '</option>' ));
+                        //append( $option );
+                        $( '#movies' ).append( li );
+
+
+                    }
+                }
+                
+
+                //$( '#movies' ).append( lista );
+                    
+            },
+            error: function( xhr, status )
+            {
+                if( status !== null )
+                    console.log( "Greška prilikom Ajax poziva: " + status );
+            }
+        } );
+
+
+}
 
 
 $( document ).ready( function()
@@ -50,60 +102,15 @@ $( document ).ready( function()
     } );
 
 
-    $( ".movie_title" ).on( "mouseenter", prikaziInfo );
-    $( ".movie_title" ).on( "mouseleave", sakrijInfo );
+    //$( "<div>" ).on( "mouseenter", prikaziInfo );
+    //$( "<div>" ).on( "mouseleave", sakrijInfo );
     
 } );
 
 
-function search()
-{
-    var txt = $( "#director_search" );
-    var unos = txt.val(); 
-
-    $.ajax(
-        {
-            method: 'get',
-            url: "moviesbydirector.php",
-            data:
-            {
-                q: unos
-            },
-            success: function( data )
-            {
-                $( '#movies' ).html( '' );
-                var lista = $( '<ol></ol>' );
-                $( '#movies' ).append( $( '<h3>' + unos + ' movies:</h3>' ) );
-                
-                // Jednostavno sve što dobiješ od servera stavi u dataset.
-                for ( var i = 0; i < data.title.length; ++i )
-                {
-                    //console.log(data.title[i]);
-                    var li = $( '<li class="movie_title">' + data.title[i] + '</li>' );
-                    //console.log(li);
-                    li.attr( 'id', data.id_movie[i] );
-                    //$option.attr( 'value', i );
-                    //$( "#datalist_director" ).append($( '<option value="' + i + '">' + i + '</option>' ));
-                    //append( $option );
-                    lista.append( li );
 
 
-                }
-
-                $( '#movies' ).append( lista );
-                    
-            },
-            error: function( xhr, status )
-            {
-                if( status !== null )
-                    console.log( "Greška prilikom Ajax poziva: " + status );
-            }
-        } );
-
-
-}
-
-
+/*
 prikaziInfo = function( event )
 {
 	// Dohvati element nad kojim je događaj.
@@ -153,4 +160,4 @@ sakrijInfo = function()
 {
 	// Samo ukloni (jedini) element sa id-om "balon"
 	$( "#balon" ).remove();
-}
+}*/

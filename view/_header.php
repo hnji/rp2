@@ -30,4 +30,5 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 </head>
 <body>
-    <h1>teka</h1>
+    <h1><a href="teka.php?rt=user/index">teka</a></h1>
+    
