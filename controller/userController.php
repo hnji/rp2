@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../model/tekaservice.class.php';
+require_once __DIR__ . '/adminController.php';
 
 class userController{
 
@@ -14,13 +15,21 @@ class userController{
 
     public function signin()
     {
-        require_once __DIR__ . '/../view/signin.php';
+        if( isset( $_SESSION['admin'] ) )
+        {
+            $x = new adminController;
+            $x->index();
+        }
+        
+        else
+            require_once __DIR__ . '/../view/signin.php';
     }
     
     public function login()
     {
+        
         // Provjeri sastoji li se ime samo od slova; ako ne, crtaj login formu.
-        if( !isset( $_POST["username"] ) || preg_match( '/[a-zA-Z]{3, 20}/', $_POST["username"] ) )
+        if( !isset( $_POST["username"] ) || !preg_match( '/[a-zA-Z]{3, 20}/', $_POST["username"] ) )
         {
             $x = new userController;
             $x->signin();

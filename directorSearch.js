@@ -48,6 +48,11 @@ $( document ).ready( function()
             }
         } );
     } );
+
+
+    $( ".movie_title" ).on( "mouseenter", prikaziInfo );
+    $( ".movie_title" ).on( "mouseleave", sakrijInfo );
+    
 } );
 
 
@@ -73,9 +78,9 @@ function search()
                 // Jednostavno sve što dobiješ od servera stavi u dataset.
                 for ( var i = 0; i < data.title.length; ++i )
                 {
-                    console.log(data.title[i]);
-                    var li = $( '<li>' + data.title[i] + '</li>' );
-                    console.log(li);
+                    //console.log(data.title[i]);
+                    var li = $( '<li class="movie_title">' + data.title[i] + '</li>' );
+                    //console.log(li);
                     li.attr( 'id', data.id_movie[i] );
                     //$option.attr( 'value', i );
                     //$( "#datalist_director" ).append($( '<option value="' + i + '">' + i + '</option>' ));
@@ -96,4 +101,56 @@ function search()
         } );
 
 
+}
+
+
+prikaziInfo = function( event )
+{
+	// Dohvati element nad kojim je događaj.
+	var a = $( this );
+
+	// Dohvati podatke o odgovarajućoj datoteci.
+	$.ajax(
+	{
+		url: "balon.php",
+		data: { id_movie: a.prop( "id" ) },
+		dataType: "json",
+		success: function( data )
+		{
+			console.log( "Dobio od servera: " + JSON.stringify( data ) );
+
+			// Stvori balon (div) i prikaži ga.
+			var div = $( "<div></div>" );
+
+			// Uoči: PHP vrati lastModified u sekundama od 1.1.1970.
+			// JavaScript koristi milisekunde.
+			div
+				.prop( "id", "balon" )
+				.css(
+				{
+					"position": "absolute",
+					"left": event.clientX + 20,
+					"top": event.clientY + 20,
+					"border": "solid 1px",
+					"background-color": "rgb(245, 245, 255)",
+					"padding": "5px"
+                } )
+                .html(
+                    'Average rating: ' + data.average_rating + 
+                    '<br>Release year: ' + data.release_year + 
+                    '<br>Genre: ' + data.genre + 
+                    '<br>Cast: ' + data.cast
+                );
+
+
+			$( "body" ).append( div );
+		}
+	} );
+}
+
+
+sakrijInfo = function()
+{
+	// Samo ukloni (jedini) element sa id-om "balon"
+	$( "#balon" ).remove();
 }

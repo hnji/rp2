@@ -47,7 +47,7 @@ Director:
 </p>
 
 
-<div id="movies"></div>
+<p id="movies"></p>
 
 <?php
    /*foreach( $movieList as $movie ){
