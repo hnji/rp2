@@ -3,7 +3,7 @@
 
 Congratulations!
 <br>
-You have successfully added movie " <?php echo $_POST['newtitle']; ?> " to Teka database.
+You have successfully added movie " <?php echo $title ?> " to Teka database.
 
 
 <?php require_once __DIR__ . '/_footer.php'; ?>

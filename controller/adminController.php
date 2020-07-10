@@ -98,6 +98,8 @@ class adminController{
     {
         $x = new TekaService;
         $x->newMovie();
+        if( isset( $_POST['newtitle'] ) )
+            $title = $_POST['newtitle'];
         require_once __DIR__ . '/../view/newmovie.php';
 
     }

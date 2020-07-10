@@ -201,7 +201,7 @@ class TekaService{
             $db = DB::getConnection();
             try{
                 $st = $db->prepare( 'INSERT INTO dz4_movies(title, director, release_year, genre, cast, average_rating) VALUES ' .
-                            '(:title, :director, :release_year, :genre, :cast, 0)' );
+                            '(:title, :director, :release_year, :genre, :cast, -1)' );
                 $st->execute( array( 'title' => $_POST['newtitle'], 
                             'director' => $_POST['newdirector'], 
                             'release_year' => $_POST['newyear'], 
