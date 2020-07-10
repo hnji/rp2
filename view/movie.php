@@ -12,7 +12,7 @@ echo
     '<ul>' . 
     '<li>Average rating: ';
     if( (int) $movie->average_rating === -1)
-        echo 'No one has rated this movie yet!';
+        echo '<span id="js_averagerating">' .'No one has rated this movie yet!' . '</span>';
     else 
         echo '<span id="js_averagerating">' .$movie->average_rating . '</span>';
 echo
